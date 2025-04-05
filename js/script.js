@@ -7,7 +7,9 @@ function main(){
         showAuthBtn = $("#show-auth"),
         showRegBtn = $("#show-reg"),
         authForm = $("#auth-form"),
-        regForm = $("#reg-form");
+        regForm = $("#reg-form")
+        
+        searchBtn = $('#form-submit');
         
 
     signInBtn.on('click', () => {
@@ -22,6 +24,7 @@ function main(){
                 'display': 'none',
             });
         }
+        return;
     });
 
     showAuthBtn.on("click", () => {
@@ -37,6 +40,7 @@ function main(){
                 'display': 'block',
             })
         }
+        return;
     })
 
     showRegBtn.on("click", () => {
@@ -52,6 +56,14 @@ function main(){
                 'display': 'block',
             })
         }
+        return;
+    })
+
+    
+
+    searchBtn.on("click", () => {
+        window.location.href = "vacancies/"
+        return;
     })
 }
 
