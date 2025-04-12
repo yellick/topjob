@@ -7,9 +7,64 @@
     <link rel="stylesheet" href="../css/reset.css">
     <link rel="stylesheet" href="../css/font-awesome.min.css">
     <link rel="stylesheet" href="../css/fonst.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/modal.css">
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+
+    <div class="modal-wrap" id="modal-login">
+        <div class="modal">
+            <div class="modal-content">
+                <div class="switcher">
+                    <button id="show-auth" class="active">Войти</button>
+                    <button id="show-reg">Зарегестрироваться</button>
+                </div>
+
+                <div class="form-wrap">
+                    <form id="auth-form">
+                        <p class="form-title">Войти на Top Job</p>
+
+                        <div class="input-wrap">
+                            <label for="email">Почта</label>
+                            <input type="email" id="login-email" placeholder="Ivan@mail.ru">
+                        </div>
+                        <div class="input-wrap">
+                            <label for="password">Пароль</label>
+                            <input type="password" id="login-password" placeholder="······">
+                        </div>
+
+                        <button class="form-btn" id="login-btn">
+                            Войти
+                        </button>
+                    </form>
+
+                    <form id="reg-form">
+                        <p class="form-title">Регистрация на Top Job</p>
+
+                        <div class="input-wrap">
+                            <label for="email">Почта</label>
+                            <input type="email" id="reg-email" placeholder="Ваша почта">
+                        </div>
+                        <div class="input-wrap">
+                            <label for="password">Пароль</label>
+                            <input type="password" id="reg-password" placeholder="Придумайте пароль">
+                        </div>
+                        <div class="input-wrap">
+                            <label for="password">ФИО</label>
+                            <input type="password" id="reg-name" placeholder="Иванов Иван Иванович">
+                        </div>
+
+                        <button class="form-btn" id="reg-btn">
+                            Регистрация
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <header>
         <a href="../" class="logo">
             <div class="logo-circle">
@@ -42,7 +97,60 @@
         </section>
 
         <div class="vacancies-wrap">
-            <section id="filters"></section>
+            <section id="filters">
+                <div class="filter">
+                    <div class="filter-title">
+                        <p>Уровень дохода</p> 
+                    </div>
+            
+                    <div class="filters-list">
+                        <ul>
+                            <li>
+                                <label>
+                                    <input type="radio" name="amount" value="0" checked>
+                                    <span>не имеет значения</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="radio" name="amount" value="25000">
+                                    <span>от 25 000 ₽</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="radio" name="amount" value="75000">
+                                    <span>от 75 000 ₽</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="radio" name="amount" value="125000">
+                                    <span>от 125 000 ₽</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="radio" name="amount" value="175000">
+                                    <span>от 175 000 ₽</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="radio" name="amount" value="225000">
+                                    <span>от 225 000 ₽</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="radio" name="amount" value="275000">
+                                    <span>от 275 000 ₽</span>
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
     
             <section id="vacancies">
                 <a href="../vacancy/" class="vacancy">
@@ -191,5 +299,8 @@
             </section>
         </div>
     </main>
+
+    <script src="../js/jquery.js"></script>
+    <script src="../js/modal.js"></script>
 </body>
 </html>

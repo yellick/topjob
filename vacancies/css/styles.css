@@ -8,111 +8,6 @@ button:hover {
     cursor: pointer;
 }
 
-header {
-    width: 100%;
-    height: 50px;
-    background: #ec1616;
-
-    padding: 0 10%;
-    box-sizing: border-box;
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center; 
-    
-    .logo {
-        height: 100%;
-        display: flex;
-        align-items: center;
-
-        text-decoration: none;
-
-        .logo-circle {
-            width: 30px;
-            height: 30px;
-
-            border-radius: 50%;
-
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            background: #fff;
-            color: #ec1616;
-        }
-
-        .logo-name {
-            font-size: 20px;
-            color: #fff;
-
-            margin-left: 10px;
-
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-    }
-    .logo:visited {
-        .logo-circle {
-            color: #ec1616;
-        }
-
-        .logo-name {
-            color: #fff;
-        }
-    }
-
-    .profile {
-        height: 100%;
-        display: flex;
-        align-items: center;
-
-        #signin-btn {
-            width: 100px;
-            height: 30px;
-            
-            border: 2px solid #fff;
-            border-radius: 5px;
-
-            color: #fff;
-            background: none;
-
-            text-transform: uppercase;
-            font-weight: 700;
-
-            transition: .2s;
-        }
-        #signin-btn:hover {
-            cursor: pointer;
-            background: rgba(255,255,255, .3);
-        }
-        #signin-btn:active {
-            background: #fff;
-            color: #ec1616;
-        }
-
-        .user {
-            width: 30px;
-            height: 30px;
-
-            background: #fff;
-            color: #ec1616;
-            text-decoration: none;
-            font-weight: 600;
-            letter-spacing: 1px;
-
-            border-radius: 50%;
-
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .user:visited {
-            color: #ec1616;
-        }
-    }
-}
-
 
 main{
     width: 100%;
@@ -180,8 +75,69 @@ main{
         justify-content: space-between;
 
         #filters {
-            width: 27%;
+            width: 29%;
             height: 100%;
+        
+            .filter {
+                width: 100%;
+                padding: 20px;
+                margin-bottom: 20px;
+                user-select: none;
+                
+                .filter-title {
+                    font-weight: 800;
+                    margin-bottom: 10px;
+                }
+        
+                .filters-list {
+                    ul {
+                        list-style-type: none;
+                        padding: 0;
+        
+                        li {
+                            margin-bottom: 10px;
+                            display: flex;
+                            align-items: center;
+        
+                            label {
+                                display: flex;
+                                align-items: center;
+                                width: 100%;
+                                cursor: pointer;
+                                padding: 8px 0;
+                                
+                                input[type="radio"] {
+                                    -webkit-appearance: none;
+                                    -moz-appearance: none;
+                                    appearance: none;
+                                    width: 18px;
+                                    height: 18px;
+                                    border: 2px solid #ccc;
+                                    border-radius: 50%;
+                                    margin-right: 12px;
+                                    position: relative;
+                                    cursor: pointer;
+                                    transition: all 0.2s ease;
+        
+                                    &:checked {
+                                        border-color: #0cbff6;
+                                        background-color: #0cbff6;
+                                        box-shadow: inset 0 0 0 2px #fff;
+                                    }
+                                }
+        
+                                span {
+                                    line-height: 1.3;
+                                }
+                            }
+        
+                            &:hover {
+                                background-color: #f5f5f5;
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         #vacancies {
@@ -222,6 +178,12 @@ main{
                 .vacancy-location {
                     font-size: 14px;
                 }
+            }
+
+            .vacancy:hower {
+                -webkit-box-shadow: 0px 1px 8px 0px rgba(34, 60, 80, 0.2);
+                -moz-box-shadow: 0px 1px 8px 0px rgba(34, 60, 80, 0.2);
+                box-shadow: 0px 1px 8px 0px rgba(34, 60, 80, 0.2);
             }
 
             .vacancy:visited {
