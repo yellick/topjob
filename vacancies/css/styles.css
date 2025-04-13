@@ -81,6 +81,7 @@ main{
             .filter {
                 width: 100%;
                 padding: 20px;
+                box-sizing: border-box;
                 margin-bottom: 20px;
                 user-select: none;
                 
@@ -104,7 +105,8 @@ main{
                                 align-items: center;
                                 width: 100%;
                                 cursor: pointer;
-                                padding: 8px 0;
+                                padding: 8px 5px;
+                                box-sizing: border-box;
                                 
                                 input[type="radio"] {
                                     -webkit-appearance: none;
@@ -158,6 +160,8 @@ main{
 
                 border-radius: 15px;
 
+                transition: 0.2s;
+
                 .vacancy-title {
                     font-size: 24px;
                     font-weight: 700;
@@ -180,7 +184,7 @@ main{
                 }
             }
 
-            .vacancy:hower {
+            .vacancy:hover {
                 -webkit-box-shadow: 0px 1px 8px 0px rgba(34, 60, 80, 0.2);
                 -moz-box-shadow: 0px 1px 8px 0px rgba(34, 60, 80, 0.2);
                 box-shadow: 0px 1px 8px 0px rgba(34, 60, 80, 0.2);
