@@ -1,96 +1,54 @@
+<?php
+    require_once '../get_src.php';
+    require_once '../php/db_conn.php';
+
+    $user_id = $_COOKIE['user'] ?? null;
+    $is_authenticated = false;
+
+    if ($user_id) {
+        $user_id = filter_var($user_id, FILTER_VALIDATE_INT);
+        if ($user_id !== false && $user_id > 0) {
+            try {
+                $stmt = $db->prepare("SELECT * FROM `applicants` WHERE `id` = ?");
+                $stmt->bind_param("i", $user_id);
+                $stmt->execute();
+                $result = $stmt->get_result();
+
+                if ($result->num_rows > 0) {
+                    $user = $result->fetch_assoc();
+                    $is_authenticated = true;
+
+                    $name_parts = explode(' ', $user['user_name']);
+                    $initials = '';
+                    if (isset($name_parts[1])) {
+                        $initials .= mb_substr($name_parts[1], 0, 1, 'UTF-8');
+                    }
+                    if (isset($name_parts[2])) {
+                        $initials .= mb_substr($name_parts[2], 0, 1, 'UTF-8');
+                    }
+                }
+            } catch (Exception $e) {
+                error_log("Database error: " . $e->getMessage());
+                header("Location: " . BASE_URL . "error.php");
+                exit();
+            }
+        }
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Top Job - </title>
-    <link rel="icon" href="../assets/logo.png" type="image/png">
-    <link rel="stylesheet" href="../css/reset.css">
-    <link rel="stylesheet" href="../css/font-awesome.min.css">
-    <link rel="stylesheet" href="../css/fonst.css">
-    <link rel="stylesheet" href="../css/header.css">
-    <link rel="stylesheet" href="../css/footer.css">
-    <link rel="stylesheet" href="../css/modal.css">
+    <?php require '../modules/def_links.php'; ?>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    
-    <div class="modal-wrap" id="modal-login">
-        <div class="modal">
-            <div class="modal-content">
-                <div class="switcher">
-                    <button id="show-auth" class="active">Войти</button>
-                    <button id="show-reg">Зарегестрироваться</button>
-                </div>
 
-                <div class="form-wrap">
-                    <form id="auth-form">
-                        <p class="form-title">Войти на Top Job</p>
-
-                        <div class="input-wrap">
-                            <label for="email">Почта</label>
-                            <input type="email" id="login-email" placeholder="Ivan@mail.ru">
-                        </div>
-                        <div class="input-wrap">
-                            <label for="password">Пароль</label>
-                            <input type="password" id="login-password" placeholder="······">
-                        </div>
-
-                        <button class="form-btn" id="login-btn">
-                            Войти
-                        </button>
-                    </form>
-
-                    <form id="reg-form">
-                        <p class="form-title">Регистрация на Top Job</p>
-
-                        <div class="input-wrap">
-                            <label for="email">Почта</label>
-                            <input type="email" id="reg-email" placeholder="Ваша почта">
-                        </div>
-                        <div class="input-wrap">
-                            <label for="password">Пароль</label>
-                            <input type="password" id="reg-password" placeholder="Придумайте пароль">
-                        </div>
-                        <div class="input-wrap">
-                            <label for="password">ФИО</label>
-                            <input type="password" id="reg-name" placeholder="Иванов Иван Иванович">
-                        </div>
-
-                        <button class="form-btn" id="reg-btn">
-                            Регистрация
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <header>
-        <a href="../" class="logo">
-            <div class="logo-circle">
-                <h1>TJ</h1>
-            </div>
-            <div class="logo-name">
-                <h1>Top Job</h1>
-            </div>
-        </a>
-
-        <div class="profile">
-            
-            <button id="signin-btn">
-                Войти
-            </button>
-
-            <!-- 
-            <a href="profile/" class="user">
-                <p>МГ</p>
-            </a>
-             -->
-            
-        </div>
-    </header>
+    <?php require '../modules/modal.php'; ?>
+    <?php require '../modules/header.php'; ?>
 
     <main>
         <div class="section-column">
@@ -181,14 +139,21 @@
                     и удобные продукты.
                 </p>
             </section>
+
+            <section id="respond-block">
+                <p class="respond-text">
+                    Заинтересовала вакансия?
+                    <br>
+                    Оставьте отклик и работодатель свяжется с вами!
+                </p>
+                <button class="respond-btn">Откликнуться</button>
+            </section>
         </div>
     </main>
-    
-    <footer>
-        <h1>Работа на Top Job!</h1>
-    </footer>
 
-    <script src="../js/jquery.js"></script>
-    <script src="../js/modal.js"></script>
+    <?php require '../modules/footer.php'; ?>
+    
+    <?php require '../modules/def_scripts.php'; ?>
+    <script src="js/script.js"></script>
 </body>
 </html>
