@@ -41,7 +41,7 @@
                         </div>
                         <div class="input-wrap">
                             <label for="password">ФИО *</label>
-                            <input type="password" id="reg-name" placeholder="Иванов Иван Иванович" required>
+                            <input type="text" id="reg-name" placeholder="Иванов Иван Иванович" required>
                         </div>
 
                         <button class="form-btn" id="reg-btn">
