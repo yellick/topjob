@@ -10,12 +10,17 @@ function main() {
             showAuthBtn = $("#show-auth"),
             showRegBtn = $("#show-reg"),
             authForm = $("#auth-form"),
-            regForm = $("#reg-form");
+            regForm = $("#reg-form"),
+
+            body = $("body");
 
 
         signInBtn.on('click', () => {
             modal.css({ 
                 'display': 'flex',
+            })
+            body.css({ 
+                'overflow-y': 'hidden',
             })
         })
 
@@ -24,6 +29,9 @@ function main() {
                 modal.css({
                     'display': 'none',
                 });
+                body.css({ 
+                    'overflow-y': 'scroll',
+                })
             }
             return;
         });
