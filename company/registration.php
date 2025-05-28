@@ -1,10 +1,19 @@
-<?php require_once '../get_src.php';
+<?php 
+    require_once '../get_src.php';
+    require_once '../php/db_conn.php';
+    require_once '../php/get_cities.php';
 
-    $user_id = $_COOKIE['user'] ?? null;
-    if ($user_id) {
-        //
-    } else {
-        //
+    $company_id = $_COOKIE['company_user'] ?? null;
+    if ($company_id) {
+        $stmt = $db->prepare("SELECT id FROM companies WHERE id = ?");
+        $stmt->bind_param("i", $company_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result && $result->num_rows > 0) {
+            header("Location: dashboard/");
+            exit();
+        }
     }
 ?>
 <!DOCTYPE html>
@@ -15,6 +24,7 @@
     <title>Top Job - Компания</title>
     <?php require '../modules/def_links.php'; ?>
     <link rel="stylesheet" href="css/regStyles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css">
 </head>
 <body>
 
@@ -50,20 +60,33 @@
                 </div>
 
                 <div class="input-wrap">
-                    <label for="email">Название компании</label>
-                    <input id="name" name="name" type="email" placeholder="ООО Сайты" required>
+                    <label for="name">Название компании</label>
+                    <input id="name" name="name" type="text" placeholder="ООО Сайты" required>
                 </div>
+                
+                <div class="input-wrap">
+                    <label for="city">Город</label>
+                    <select id="city" name="city" class="city-select">
+                        <option value=""></option>
+                        <?php foreach ($cities as $city): ?>
+                            <option value="<?= htmlspecialchars($city['id']) ?>">
+                                <?= htmlspecialchars($city['city_name']) ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                
                 <div class="input-wrap">
                     <label for="short-description">Краткое описание компании</label>
-                    <textarea id="short-description" rows="3" placeholder="Кратко опишите вашу компанию (2-3 предложения)"></textarea>
+                    <textarea id="short-description" rows="3" placeholder="Кратко опишите вашу компанию (2-3 предложения)" required></textarea>
                 </div>
                 <div class="input-wrap">
                     <label for="full-description">Полное описание компании</label>
-                    <textarea id="full-description" rows="10" placeholder="Подробно расскажите о вашей компании"></textarea>
+                    <textarea id="full-description" rows="10" placeholder="Подробно расскажите о вашей компании" required></textarea>
                 </div>
             </div>
 
-            <button id="reg-btn">Войти</button>
+            <button id="reg-btn">Зарегестрироваться</button>
         </form>
 
         <div class="link">
@@ -73,6 +96,10 @@
     </main>
     
     <?php require '../modules/def_scripts.php'; ?>
-    <script src="js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="js/regScript.js"></script>
+    <script>
+        
+    </script>
 </body>
 </html>

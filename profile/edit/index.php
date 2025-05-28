@@ -97,7 +97,7 @@
                 <div class="form-section">
                     <h2>О себе</h2>
                     <div class="form-group">
-                        <textarea id="about" rows="5" placeholder="Расскажите о себе"><?=str_replace('<br>', "\n", htmlspecialchars($user['about'] ?? ''))?></textarea>
+                        <textarea id="about" rows="5" placeholder="Расскажите о себе"><?=str_replace('<br>', "\n", $user['about'] ?? '')?></textarea>
                     </div>
                 </div>
                 
@@ -146,6 +146,7 @@
 
     <?php require '../../modules/def_scripts.php'; ?>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/jquery.inputmask.min.js"></script>
     <script src="js/script.js"></script>
 </body>
 </html>

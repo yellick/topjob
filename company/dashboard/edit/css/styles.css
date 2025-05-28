@@ -1,0 +1,226 @@
+html, body {
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    background: #fff;
+    
+    button:hover, a:hover {
+        cursor: pointer;
+    }
+}
+
+header {
+    width: 100%;
+    height: 50px;
+    padding: 0 50px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #1d8bf9;
+
+    .logo {
+        font-size: 26px;
+        letter-spacing: 1px;
+        color: #fff;
+    }
+
+    .go-back {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            width: 100px;
+            height: 30px;
+
+            background: none;
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+
+            font-size: 16px;
+
+            border: 2px solid #ffffff;
+            border-radius: 5px;
+            transition: .3s;
+        }
+
+    .go-back:hover {
+        background: #fff;
+        color: #1d8bf9;
+    }
+}
+
+main {
+    width: 100%;
+    padding: 50px 0;
+    display: flex;
+    justify-content: center;
+
+    .content {
+        width: 80%;
+        color: #505050;
+        padding: 30px;
+        box-sizing: border-box;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0px 4px 16px 0px rgba(34, 60, 80, 0.2);
+
+        form {
+            width: 100%;
+            position: relative;
+
+            h2 {
+                font-size: 26px;
+                letter-spacing: 1px;
+                margin-bottom: 30px;
+                text-align: center;
+            }
+
+            .inputs {
+                margin-bottom: 30px;
+
+                .input-wrap {
+                    margin-bottom: 25px;
+
+                    label {
+                        display: block;
+                        font-size: 16px;
+                        margin-bottom: 10px;
+                    }
+
+                    input, select, textarea {
+                        width: 100%;
+                        padding: 10px 15px;
+                        border: 1px solid #ddd;
+                        border-radius: 5px;
+                        font-size: 16px;
+                        box-sizing: border-box;
+                        transition: border-color 0.3s;
+                    }
+
+                    textarea {
+                        min-height: 150px;
+                        resize: vertical;
+                        line-height: 1.5;
+                    }
+                }
+            }
+
+            #save-btn {
+                width: 250px;
+                height: 40px;
+                margin: 20px auto 0;
+                display: block;
+                background: #1d8bf9;
+                color: #fff;
+                border: none;
+                border-radius: 5px;
+                font-size: 16px;
+                font-weight: 700;
+                letter-spacing: 1px;
+                transition: all 0.3s;
+
+                &:hover {
+                    background: #0d7ae5;
+                    cursor: pointer;
+                }
+
+                &:active {
+                    transform: scale(0.98);
+                }
+            }
+        }
+    }
+}
+
+/* Стили для Select2 с вложенностью */
+.select2-container--default {
+    width: 100% !important;
+    max-width: 100% !important;
+
+    .select2-selection--single {
+        height: 42px !important;
+        border: 1px solid #ddd !important;
+        border-radius: 5px !important;
+
+        .select2-selection__rendered {
+            line-height: 42px !important;
+            padding-left: 15px !important;
+            color: #505050 !important;
+        }
+
+        .select2-selection__arrow {
+            height: 40px !important;
+        }
+    }
+
+    .select2-dropdown {
+        border: 1px solid #ddd !important;
+        border-radius: 0 0 5px 5px !important;
+    }
+
+    .select2-results__option--highlighted {
+        background-color: #1d8bf9 !important;
+    }
+}
+
+/* Обновленные стили для Select2 */
+.select2-container--open {
+    z-index: 9999 !important;
+    
+    .select2-dropdown {
+        width: auto !important;
+        min-width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+}
+
+.select2-container {
+    .select2-selection--single {
+        .select2-selection__rendered {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+}
+
+.select2-dropdown-custom {
+    position: absolute !important;
+    width: auto !important;
+    left: 0 !important;
+    top: 100% !important;
+    margin-top: 1px !important;
+    
+    .select2-results {
+        max-height: 200px;
+        overflow-y: auto;
+    }
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    main .content {
+        width: 95%;
+        padding: 20px;
+
+        form #save-btn {
+            width: 100%;
+        }
+    }
+
+    .select2-container--open {
+        position: fixed !important;
+        left: 10px !important;
+        right: 10px !important;
+        width: auto !important;
+        
+        .select2-dropdown {
+            width: calc(100% - 20px) !important;
+        }
+    }
+}

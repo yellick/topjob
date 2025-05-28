@@ -29,8 +29,7 @@ try {
     $user = $result->fetch_assoc();
     $experience = json_decode($user['experience_json'] ?? '[]', true) ?: [];
     $skills = json_decode($user['skills_json'] ?? '[]', true) ?: [];
-    
-    
+
     $city_name = '';
     foreach ($cities as $city) {
         if ($city['id'] == ($user['city'] ?? $user['city_id'])) {
@@ -101,7 +100,7 @@ try {
                 <?php if ($user['about'] ?? ''): ?>
                     <p class="sect-title">О себе</p>
                     <div class="about-user">
-                        <p><?= nl2br(htmlspecialchars($user['about'])) ?></p>
+                        <p><?= $user['about'] ?></p>
                     </div>
                 <?php endif; ?>
 

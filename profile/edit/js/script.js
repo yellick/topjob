@@ -7,6 +7,15 @@ $(document).ready(function() {
         language: "ru"
     });
 
+    $(document).ready(function() {
+        $('#phone').inputmask({
+            mask: '+7 (999) 999-99-99',
+            placeholder: '_',
+            showMaskOnHover: false,
+            clearIncomplete: true,
+        });
+    });
+
     
     $('#about').on('keydown', function(e) {
         if (e.key === 'Enter') {

@@ -1,10 +1,18 @@
-<?php require_once '../get_src.php';
+<?php 
+    require_once '../get_src.php';
+    require_once '../php/db_conn.php';
 
-    $user_id = $_COOKIE['user'] ?? null;
-    if ($user_id) {
-        //
-    } else {
-        //
+    $company_id = $_COOKIE['company_user'] ?? null;
+    if ($company_id) {
+        $stmt = $db->prepare("SELECT id FROM companies WHERE id = ?");
+        $stmt->bind_param("i", $company_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result && $result->num_rows > 0) {
+            header("Location: dashboard/");
+            exit();
+        }
     }
 ?>
 <!DOCTYPE html>
