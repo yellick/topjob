@@ -1,6 +1,6 @@
 <?php
     setcookie('company_user', '', [
-        'expires' => time() - 3600,
+        'expires' => 0,
         'path' => '/',
         'domain' => $_SERVER['HTTP_HOST'],
         'secure' => true,
