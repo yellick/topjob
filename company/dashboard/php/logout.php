@@ -1,5 +1,5 @@
 <?php
-    setcookie('company_user', '', 1);
+    setcookie('company_user', "0", time(), "/");
 
     $response = [
         'status' => true,
