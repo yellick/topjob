@@ -32,8 +32,8 @@ function main() {
             email: $('#email').val().trim(),
             name: $('#name').val().trim(),
             city: $('#city').val(),
-            shortDescription: $('#short-description').val().trim().replace(/\n/g, '<br><br>'),
-            fullDescription: $('#full-description').val().trim().replace(/\n/g, '<br><br>')
+            shortDescription: $('#short-description').val().trim().replace(/\n/g, '<br>'),
+            fullDescription: $('#full-description').val().trim().replace(/\n/g, '<br>')
         };
 
         callApi(

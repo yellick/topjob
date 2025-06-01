@@ -73,7 +73,7 @@
             </div>
 
             <div class="content-sect">
-                <a href="edit" class="change-link">Редактировать данные</a>
+                <a href="edit/" class="link-btn">Редактировать данные</a>
             </div>
 
 
@@ -83,7 +83,7 @@
                 </div>
 
                 <div class="vacancies">
-                    <button id="add-vacancy-btn" class="change-link">Создать вакансию</button>
+                    <a href="new_vacancy/" class="link-btn">Создать вакансию</a>
 
                     <div class="vacancies-list">
                         <a href="../vacancy/" class="vacancy">
@@ -233,13 +233,6 @@
                 </div>
             </div>
         </div>
-    </main>
-
-    
-    <?=$comp_f_desc?>
-    <?=$comp_s_desc?>
-
-    <main>
     </main>
     
     <?php require '../../modules/def_scripts.php'; ?>

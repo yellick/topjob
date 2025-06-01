@@ -1,6 +1,7 @@
 <?php
     require_once '../get_src.php';
     require_once '../php/db_conn.php';
+    require_once '../php/get_cities.php';
 
     $user_id = $_COOKIE['user'] ?? null;
     $is_authenticated = false;
@@ -34,6 +35,11 @@
             }
         }
     }
+
+    $search = '';
+    if (!empty($_GET['job'])) {
+        $search = $_GET['job'];
+    }
 ?>
 
 <!DOCTYPE html>
@@ -43,6 +49,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Top Job - Поиск вакансий</title>
     <?php require '../modules/def_links.php'; ?>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -52,8 +59,8 @@
 
     <main>
         <section id="search">
-            <input type="text" id="job-search">
-            <button id="search-btn">Найти</button>
+            <input type="text" id="job-search" placeholder="Начните писать" value="<?=$search ?>">
+            <button id="search-btn" >Найти</button>
         </section>
 
         <div class="vacancies-wrap">
@@ -71,191 +78,85 @@
                                     <span>не имеет значения</span>
                                 </label>
                             </li>
-                            <li>
-                                <label>
-                                    <input type="radio" name="amount" value="25000">
-                                    <span>от 25 000 ₽</span>
-                                </label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input type="radio" name="amount" value="75000">
-                                    <span>от 75 000 ₽</span>
-                                </label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input type="radio" name="amount" value="125000">
-                                    <span>от 125 000 ₽</span>
-                                </label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input type="radio" name="amount" value="175000">
-                                    <span>от 175 000 ₽</span>
-                                </label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input type="radio" name="amount" value="225000">
-                                    <span>от 225 000 ₽</span>
-                                </label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input type="radio" name="amount" value="275000">
-                                    <span>от 275 000 ₽</span>
-                                </label>
-                            </li>
+                            
+                            <?php
+                                $stmt = $db->prepare("SELECT * FROM `salaries`");
+                                $stmt->execute();
+                                $result = $stmt->get_result();
+
+                                if ($result->num_rows > 0):
+                                    while ($row =$result->fetch_assoc()) {
+                            ?>
+                                        <li>
+                                            <label>
+                                                <input type="radio" name="amount" value="<?= $row['salary'] ?>">
+                                                <span>от <?= $row['salary'] ?> ₽</span>
+                                            </label>
+                                        </li>
+                            <?php
+                                    }
+                            ?>
+
+                            <?php else: ?>
+                                <li>
+                                    <label>
+                                        <input type="radio" name="amount" value="25000">
+                                        <span>от 25 000 ₽</span>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label>
+                                        <input type="radio" name="amount" value="75000">
+                                        <span>от 75 000 ₽</span>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label>
+                                        <input type="radio" name="amount" value="125000">
+                                        <span>от 125 000 ₽</span>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label>
+                                        <input type="radio" name="amount" value="175000">
+                                        <span>от 175 000 ₽</span>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label>
+                                        <input type="radio" name="amount" value="225000">
+                                        <span>от 225 000 ₽</span>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label>
+                                        <input type="radio" name="amount" value="275000">
+                                        <span>от 275 000 ₽</span>
+                                    </label>
+                                </li>
+                            <?php endif; ?>
                         </ul>
+                        
                     </div>
+                </div>
+                <div class="filter">
+                    <div class="filter-title">
+                        <p>Город</p> 
+                    </div>
+                    <select id="city-select" class="city-select">
+                        <option value=""></option>
+                        <?php foreach ($cities as $city): ?>
+                            <option value="<?= htmlspecialchars($city['id']) ?>" 
+                                <?= ($user['city'] ?? '') == $city['id'] ? 'selected' : '' ?>>
+                                <?= htmlspecialchars($city['city_name']) ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
                 </div>
             </section>
     
             <section id="vacancies">
-                <a href="../vacancy/" class="vacancy">
-                    <div class="vacancy-title">
-                        <h1>Front-end developer</h1>
-                    </div>
-
-                    <div class="vacancy-salary">
-                        <p>От 50000 ₽ за месяц, на руки</p>
-                    </div>
-
-                    <div class="vacancy-company">
-                        <p>ООО ПрограмЛаб</p>
-                    </div>
-
-                    <div class="vacancy-location">
-                        <p>Челябинск</p>
-                    </div>
-                </a>
                 
-                <a href="../vacancy/" class="vacancy">
-                    <div class="vacancy-title">
-                        <h1>Front-end developer</h1>
-                    </div>
-
-                    <div class="vacancy-salary">
-                        <p>От 50000 ₽ за месяц, на руки</p>
-                    </div>
-
-                    <div class="vacancy-company">
-                        <p>ООО ПрограмЛаб</p>
-                    </div>
-
-                    <div class="vacancy-location">
-                        <p>Челябинск</p>
-                    </div>
-                </a>
-                
-                <a href="../vacancy/" class="vacancy">
-                    <div class="vacancy-title">
-                        <h1>Front-end developer</h1>
-                    </div>
-
-                    <div class="vacancy-salary">
-                        <p>От 50000 ₽ за месяц, на руки</p>
-                    </div>
-
-                    <div class="vacancy-company">
-                        <p>ООО ПрограмЛаб</p>
-                    </div>
-
-                    <div class="vacancy-location">
-                        <p>Челябинск</p>
-                    </div>
-                </a>
-                
-                <a href="../vacancy/" class="vacancy">
-                    <div class="vacancy-title">
-                        <h1>Front-end developer</h1>
-                    </div>
-
-                    <div class="vacancy-salary">
-                        <p>От 50000 ₽ за месяц, на руки</p>
-                    </div>
-
-                    <div class="vacancy-company">
-                        <p>ООО ПрограмЛаб</p>
-                    </div>
-
-                    <div class="vacancy-location">
-                        <p>Челябинск</p>
-                    </div>
-                </a>
-                
-                <a href="../vacancy/" class="vacancy">
-                    <div class="vacancy-title">
-                        <h1>Front-end developer</h1>
-                    </div>
-
-                    <div class="vacancy-salary">
-                        <p>От 50000 ₽ за месяц, на руки</p>
-                    </div>
-
-                    <div class="vacancy-company">
-                        <p>ООО ПрограмЛаб</p>
-                    </div>
-
-                    <div class="vacancy-location">
-                        <p>Челябинск</p>
-                    </div>
-                </a>
-                
-                <a href="../vacancy/" class="vacancy">
-                    <div class="vacancy-title">
-                        <h1>Front-end developer</h1>
-                    </div>
-
-                    <div class="vacancy-salary">
-                        <p>От 50000 ₽ за месяц, на руки</p>
-                    </div>
-
-                    <div class="vacancy-company">
-                        <p>ООО ПрограмЛаб</p>
-                    </div>
-
-                    <div class="vacancy-location">
-                        <p>Челябинск</p>
-                    </div>
-                </a>
-                
-                <a href="../vacancy/" class="vacancy">
-                    <div class="vacancy-title">
-                        <h1>Front-end developer</h1>
-                    </div>
-
-                    <div class="vacancy-salary">
-                        <p>От 50000 ₽ за месяц, на руки</p>
-                    </div>
-
-                    <div class="vacancy-company">
-                        <p>ООО ПрограмЛаб</p>
-                    </div>
-
-                    <div class="vacancy-location">
-                        <p>Челябинск</p>
-                    </div>
-                </a>
-                
-                <a href="../vacancy/" class="vacancy">
-                    <div class="vacancy-title">
-                        <h1>Front-end developer</h1>
-                    </div>
-
-                    <div class="vacancy-salary">
-                        <p>От 50000 ₽ за месяц, на руки</p>
-                    </div>
-
-                    <div class="vacancy-company">
-                        <p>ООО ПрограмЛаб</p>
-                    </div>
-
-                    <div class="vacancy-location">
-                        <p>Челябинск</p>
-                    </div>
-                </a>
             </section>
         </div>
     </main>
@@ -263,6 +164,8 @@
     <?php require '../modules/footer.php'; ?>
 
     <?php require '../modules/def_scripts.php'; ?>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/i18n/ru.js"></script>
     <script src="js/script.js"></script>
 </body>
 </html>
