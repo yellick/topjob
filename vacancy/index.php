@@ -98,7 +98,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Top Job - </title>
+    <title><?=$v_name?></title>
     <?php require '../modules/def_links.php'; ?>
     <link rel="stylesheet" href="css/styles.css">
 </head>
@@ -128,10 +128,14 @@
             </section>
 
             <section id="vacancy-detail">
-                <h2 class="vacancy-title">Вакансия: <?=$v_name?></h2>
                 <div class="company-info">
-                    <h3 class="vacancy-section-title"><?=$company?></h3>
+                    <h3 class="vacancy-section-title">Работодатель - <?=$company?></h3>
                     <p><?=$c_f_descriptions?></p>
+                </div>
+
+                <div class="company-info">
+                    <h3 class="vacancy-section-title">Описание вакансии</h3>
+                    <p><?=$v_description?></p>
                 </div>
 
                 <div class="vacancy-section">

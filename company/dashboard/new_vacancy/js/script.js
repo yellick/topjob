@@ -114,10 +114,11 @@ $(document).ready(function() {
                     notif.create(0);
                     notif.show();
                     
-                    // Перенаправление через 2 секунды
-                    setTimeout(() => {
-                        window.location.href = "../";
-                    }, 2000);
+                    if (response.vacancy_id) {
+                        window.open('../../../vacancy/?vacancy=' + response.vacancy_id, '_blank');
+                    }
+                
+                    window.location.href = "../";
                 } else {
                     // Ошибка с сервера
                     notif.settings['messages'][2] = response.message || notif.settings['messages'][2];
@@ -127,7 +128,7 @@ $(document).ready(function() {
                     // Для ошибки авторизации - перенаправляем
                     if (response.code === 4) {
                         setTimeout(() => {
-                            window.location.href = "../../auth/";
+                            window.location.href = "../../";
                         }, 2000);
                     }
                 }

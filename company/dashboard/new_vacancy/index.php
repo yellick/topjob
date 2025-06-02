@@ -18,21 +18,6 @@
         header("Location: ../../");
         exit();
     }
-
-    $result = $result->fetch_assoc();
-
-    $comp_name = $result["name"];
-    $comp_s_desc = $result["short_desc"];
-    $comp_f_desc = $result["full_desc"];
-    $comp_email = $result["email"];
-
-    $city_name = '';
-    foreach ($cities as $city) {
-        if ($city['id'] == ($result["city_id"] ?? $result["city_id"])) {
-            $city_name = $city['city_name'];
-            break;
-        }
-    }
 ?>
 <!DOCTYPE html>
 <html lang="ru">

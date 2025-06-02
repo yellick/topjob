@@ -84,151 +84,39 @@
 
                 <div class="vacancies">
                     <a href="new_vacancy/" class="link-btn">Создать вакансию</a>
+                    <div class="table-wrap">
+                        <table>
+                            <caption>Список вакансий</caption>
+                            <thead>
+                                <tr>
+                                    <th>Вакансия</th>
+                                    <th>Статус</th>
+                                    <th>Действия</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                    $stmt = $db->prepare("SELECT `id`, `vacancy_name`, `status` FROM `vacancies` WHERE company_id = ? ORDER BY status DESC");
+                                    $stmt->bind_param("i", $company_id);
+                                    $stmt->execute();
+                                    $result = $stmt->get_result();
 
-                    <div class="vacancies-list">
-                        <a href="../vacancy/" class="vacancy">
-                            <div class="vacancy-title">
-                                <h1>Front-end developer</h1>
-                            </div>
-
-                            <div class="vacancy-salary">
-                                <p>От 50000 ₽ за месяц, на руки</p>
-                            </div>
-
-                            <div class="vacancy-company">
-                                <p>ООО ПрограмЛаб</p>
-                            </div>
-
-                            <div class="vacancy-location">
-                                <p>Челябинск</p>
-                            </div>
-                        </a>
-                        
-                        <a href="../vacancy/" class="vacancy">
-                            <div class="vacancy-title">
-                                <h1>Front-end developer</h1>
-                            </div>
-
-                            <div class="vacancy-salary">
-                                <p>От 50000 ₽ за месяц, на руки</p>
-                            </div>
-
-                            <div class="vacancy-company">
-                                <p>ООО ПрограмЛаб</p>
-                            </div>
-
-                            <div class="vacancy-location">
-                                <p>Челябинск</p>
-                            </div>
-                        </a>
-                        
-                        <a href="../vacancy/" class="vacancy">
-                            <div class="vacancy-title">
-                                <h1>Front-end developer</h1>
-                            </div>
-
-                            <div class="vacancy-salary">
-                                <p>От 50000 ₽ за месяц, на руки</p>
-                            </div>
-
-                            <div class="vacancy-company">
-                                <p>ООО ПрограмЛаб</p>
-                            </div>
-
-                            <div class="vacancy-location">
-                                <p>Челябинск</p>
-                            </div>
-                        </a>
-                        
-                        <a href="../vacancy/" class="vacancy">
-                            <div class="vacancy-title">
-                                <h1>Front-end developer</h1>
-                            </div>
-
-                            <div class="vacancy-salary">
-                                <p>От 50000 ₽ за месяц, на руки</p>
-                            </div>
-
-                            <div class="vacancy-company">
-                                <p>ООО ПрограмЛаб</p>
-                            </div>
-
-                            <div class="vacancy-location">
-                                <p>Челябинск</p>
-                            </div>
-                        </a>
-                        
-                        <a href="../vacancy/" class="vacancy">
-                            <div class="vacancy-title">
-                                <h1>Front-end developer</h1>
-                            </div>
-
-                            <div class="vacancy-salary">
-                                <p>От 50000 ₽ за месяц, на руки</p>
-                            </div>
-
-                            <div class="vacancy-company">
-                                <p>ООО ПрограмЛаб</p>
-                            </div>
-
-                            <div class="vacancy-location">
-                                <p>Челябинск</p>
-                            </div>
-                        </a>
-                        
-                        <a href="../vacancy/" class="vacancy">
-                            <div class="vacancy-title">
-                                <h1>Front-end developer</h1>
-                            </div>
-
-                            <div class="vacancy-salary">
-                                <p>От 50000 ₽ за месяц, на руки</p>
-                            </div>
-
-                            <div class="vacancy-company">
-                                <p>ООО ПрограмЛаб</p>
-                            </div>
-
-                            <div class="vacancy-location">
-                                <p>Челябинск</p>
-                            </div>
-                        </a>
-                        
-                        <a href="../vacancy/" class="vacancy">
-                            <div class="vacancy-title">
-                                <h1>Front-end developer</h1>
-                            </div>
-
-                            <div class="vacancy-salary">
-                                <p>От 50000 ₽ за месяц, на руки</p>
-                            </div>
-
-                            <div class="vacancy-company">
-                                <p>ООО ПрограмЛаб</p>
-                            </div>
-
-                            <div class="vacancy-location">
-                                <p>Челябинск</p>
-                            </div>
-                        </a>
-                        
-                        <a href="../vacancy/" class="vacancy">
-                            <div class="vacancy-title">
-                                <h1>Front-end developer</h1>
-                            </div>
-
-                            <div class="vacancy-salary">
-                                <p>От 50000 ₽ за месяц, на руки</p>
-                            </div>
-
-                            <div class="vacancy-company">
-                                <p>ООО ПрограмЛаб</p>
-                            </div>
-
-                            <div class="vacancy-location">
-                                <p>Челябинск</p>
-                            </div>
-                        </a>
+                                    while ($row = $result->fetch_assoc()):
+                                ?>
+                                    <tr>
+                                        <td><?=$row['vacancy_name']?></td>
+                                        <?php if ($row['status']): ?>
+                                            <td style="color: #ff8316;">Активная</td>
+                                        <?php else: ?>
+                                            <td style="color: green;">Закрыта</td>
+                                        <?php endif; ?>
+                                        <td>
+                                            <a href="upd_vacancy/?vacancy=<?=$row['id']?>">Изменить</a>
+                                        </td>
+                                    </tr>
+                                <?php endwhile; ?>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

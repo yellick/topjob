@@ -105,6 +105,78 @@ main {
 
             .vacancies {
                 margin-top: 20px;
+
+                .table-wrap {
+                    width: 80%;
+
+
+                    table {
+                        margin-top: 30px;
+                        border: 1px solid #606060;
+                        height: 100%;
+                        width: 100%;
+                        table-layout: fixed;
+                        border-collapse: collapse;
+                        border-spacing: 1px;
+                        text-align: left;
+                        overflow-x: scroll;
+                    }
+
+                    caption {
+                        caption-side: top;
+                        text-align: left;
+                        margin-bottom: 10px;
+                    }
+
+                    th {
+                        border: 1px solid #dededf;
+                        background-color: #eceff1;
+                        color: #000000;
+                        padding: 5px;
+                        text-align: center;
+                        overflow: hidden;
+                    }
+                    th:nth-child(1) {
+                        min-width: 400px;
+                    }
+                    th:nth-child(2) {
+                        width: 100px;
+                    }
+                    th:nth-child(3) {
+                        width: 120px;
+                    }
+
+
+                    td {
+                        border: 1px solid #dededf;
+                        background-color: #ffffff;
+                        color: #000000;
+                        padding: 5px;
+                        overflow: hidden;
+
+                        a {
+                            display: block;
+                            width: 100px;
+                            margin: 0 10px;
+                            padding: 5px;
+                            border: none;
+                            text-align: center;
+                            color: #fff;
+                            background: #1d8bf9;
+                            text-decoration: none;
+                        }
+                        a:visited {
+                            color: #fff;
+                            text-decoration: none;
+                        }
+                    }
+                    td:nth-child(2) {
+                        text-align: center;
+                    }
+                    td:nth-child(3) {
+                        padding: 5px 0;
+                    }
+                }
             }
 
             .vacancies-list {

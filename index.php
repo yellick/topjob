@@ -67,7 +67,7 @@
         </div>
     </main>
     
-    <?php require 'modules/footer.php'; ?>
+    <?php //require 'modules/footer.php'; ?>
     
     <?php require 'modules/def_scripts.php'; ?>
     <script src="js/script.js"></script>
