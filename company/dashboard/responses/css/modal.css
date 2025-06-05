@@ -1,0 +1,254 @@
+.modal_wrap {
+    width: 100%;
+    height: 100%;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    background: rgba(0,0,0,.5);
+    z-index: 1000;
+
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+    .modal {
+        width: 700px;
+        max-height: 90vh;
+        border-radius: 15px;
+        padding: 10px;
+        box-sizing: border-box;
+        background: #fff;
+        position: relative;
+
+        .modal-content {
+            width: 100%;
+            height: 100%;
+
+            display: flex;
+            flex-direction: column;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            > div {
+                padding: 10px 10px;
+                box-shadow: 0 2px 8px rgba(74, 131, 255, 0.2);
+                border-radius: 5px;
+            }
+
+            .loading-spinner {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                height: 100%;
+
+                .spinner {
+                    width: 50px;
+                    height: 50px;
+                    border: 5px solid #f3f3f3;
+                    border-top: 5px solid #4a83ff;
+                    border-radius: 50%;
+                    animation: spin 1s linear infinite;
+                    margin-bottom: 20px;
+                }
+
+                p {
+                    font-size: 18px;
+                    color: #666;
+                }
+            }
+
+            .error-message {
+                text-align: center;
+                padding: 30px;
+
+                svg {
+                    width: 48px;
+                    height: 48px;
+                    fill: #d32f2f;
+                }
+
+                p {
+                    font-size: 18px;
+                    color: #d32f2f;
+                    margin: 20px 0;
+                    font-weight: 600;
+                }
+
+                button {
+                    padding: 8px 20px;
+                    background: #4a83ff;
+                    color: white;
+                    border: none;
+                    border-radius: 4px;
+                    cursor: pointer;
+                    transition: .2s;
+
+                    &:hover {
+                        background: #3a73ee;
+                    }
+                }
+            }
+
+            .vacancy {
+                padding-bottom: 15px;
+                margin-bottom: 15px;
+                border-bottom: 1px solid #eee;
+                position: relative;
+
+                .title {
+                    font-size: 20px;
+                    font-weight: 700;
+                    margin-bottom: 5px;
+                }
+
+                .salary {
+                    font-size: 16px;
+                    color: #666;
+                }
+
+                .modal-close-btn {
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    width: 30px;
+                    height: 30px;
+                    border: none;
+                    background: none;
+                    font-size: 24px;
+                    cursor: pointer;
+                    color: #666;
+                    transition: .2s;
+
+                    &:hover {
+                        color: #333;
+                    }
+                }
+            }
+
+            .profile {
+                flex: 1;
+                overflow-y: auto;
+                margin-bottom: 15px;
+
+                .title {
+                    text-align: center;
+                    font-size: 18px;
+                    font-weight: 700;
+                    margin-bottom: 20px;
+                }
+
+                .personal-data {
+                    margin-bottom: 20px;
+
+                    #name {
+                        font-size: 18px;
+                        margin-bottom: 5px;
+                        font-weight: 600;
+                    }
+
+                    .birth-date {
+                        font-size: 12px;
+                        margin-bottom: 10px;
+                        color: #666;
+                    }
+
+                    .contacts {
+                        display: flex;
+                        font-size: 14px;
+                        
+                        * {
+                            margin-right: 20px;
+                            color: #4a83ff;
+                            text-decoration: none;
+                        }
+                        *:visited {
+                            color: #4a83ff;
+                            text-decoration: none;
+                        }
+                    }
+                }
+
+                .resume {
+                    font-size: 14px;
+
+                    .subtitle {
+                        font-size: 16px;
+                        font-weight: 600;
+                        margin-bottom: 10px;
+                        color: #333;
+                    }
+
+                    > * {
+                        margin-bottom: 20px;
+                    }
+
+                    * ul {
+                        list-style: none;
+                        padding-left: 0;
+                        
+                        li {
+                            position: relative;
+                            padding-left: 20px;
+                            margin-left: 10px;
+                            margin-bottom: 8px;
+                        }
+                        
+                        li::before {
+                            content: "—";
+                            position: absolute;
+                            left: 0;
+                            color: #000;
+                        }
+                    }
+
+                    .about {
+                        padding-left: 10px;
+                        line-height: 1.6;
+                    }
+                }
+            }
+
+            .actions {
+                height: 5%;
+                display: flex;
+                flex-direction: row-reverse;
+
+                * {
+                    width: 100px;
+                    height: 30px;
+
+                    margin: 0 10px;
+
+                    border: none;
+                    border-radius: 5px;
+
+                    color: #fff;
+                    font-size: 16px;
+
+                    transition: .2s;
+                }
+                *:hover {
+                    box-shadow: 0 4px 8px rgba(74, 131, 255, 0.2);
+                }
+
+                #apply {
+                    background: #0084ff;
+                }
+
+                #deny {
+                    background: #ff4400;
+                }
+            }
+        }
+    }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

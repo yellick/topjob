@@ -21,6 +21,7 @@
     // Получение данных из формы
     $vacancy_id = $_POST['id'] ?? 0;
     $vacancy_name = $_POST['title'] ?? '';
+    $status = $_POST['status'] ?? '';
     $salary = $_POST['salary'] ?? '';
     $description = $_POST['description'] ?? '';
     $responsibilities = $_POST['responsibilities'] ?? '[]';
@@ -59,6 +60,7 @@
         // Подготовка и выполнение запроса на обновление
         $stmt = $db->prepare("UPDATE vacancies SET 
                                 vacancy_name = ?,
+                                status = ?,
                                 salary = ?,
                                 description = ?,
                                 responsibilities = ?,
@@ -67,8 +69,9 @@
                             WHERE id = ? AND company_id = ?");
         
         $stmt->bind_param(
-            "ssssssii", 
+            "sisssssii", 
             $vacancy_name, 
+            $status, 
             $salary, 
             $description,
             $responsibilities,

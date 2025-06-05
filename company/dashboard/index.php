@@ -33,6 +33,17 @@
             break;
         }
     }
+
+
+    $stmt = $db->prepare("SELECT COUNT(orders.id) as orders_count FROM orders
+                            INNER JOIN vacancies ON orders.vacancy_id = vacancies.id
+                            INNER JOIN companies ON vacancies.company_id = companies.id
+                          WHERE companies.id = ?");
+    $stmt->bind_param("i", $company_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    $orders_count = $result->fetch_assoc()['orders_count'];
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -48,6 +59,22 @@
         <div class="logo">
             <h1>Управление компанией</h1>
         </div>
+
+        <div class=""></div>
+
+        <a href="responses/">
+            Отклики на вакансии
+
+            <?php
+                if ($orders_count > 0) {
+                    if($orders_count < 10) {
+                        echo '<span class="count">'.$orders_count.'</span>';
+                    } else {
+                        echo '<span class="count">9+</span>';
+                    }
+                }
+            ?>
+        </a>
 
         <button id="logout-btn">
             Выйти
@@ -96,20 +123,23 @@
                             </thead>
                             <tbody>
                                 <?php
-                                    $stmt = $db->prepare("SELECT `id`, `vacancy_name`, `status` FROM `vacancies` WHERE company_id = ? ORDER BY status DESC");
+                                    $stmt = $db->prepare("SELECT `id`, `vacancy_name`, `status` FROM `vacancies` WHERE company_id = ? ORDER BY status ASC");
                                     $stmt->bind_param("i", $company_id);
                                     $stmt->execute();
                                     $result = $stmt->get_result();
+
+                                    $statuses = [
+                                        '<td style="color: #ff8316;">Активная</td>',
+                                        '<td style="color: #00ff1a;">Закрыта</td>',
+                                        '<td style="color:rgb(5, 19, 124);">Заморожена</td>'
+                                    ];
 
                                     while ($row = $result->fetch_assoc()):
                                 ?>
                                     <tr>
                                         <td><?=$row['vacancy_name']?></td>
-                                        <?php if ($row['status']): ?>
-                                            <td style="color: #ff8316;">Активная</td>
-                                        <?php else: ?>
-                                            <td style="color: green;">Закрыта</td>
-                                        <?php endif; ?>
+
+                                        <?=$statuses[$row['status']]?>
                                         <td>
                                             <a href="upd_vacancy/?vacancy=<?=$row['id']?>">Изменить</a>
                                         </td>

@@ -98,7 +98,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?=$v_name?></title>
+    <title>Вакансия - <?=$v_name?></title>
     <?php require '../modules/def_links.php'; ?>
     <link rel="stylesheet" href="css/styles.css">
 </head>
@@ -176,13 +176,43 @@
                 </p>
             </section>
 
-            <section id="respond-block">
-                <p class="respond-text">
-                    Заинтересовала вакансия?
-                    <br>
-                    Оставьте отклик и работодатель свяжется с вами!
-                </p>
-                <button class="respond-btn">Откликнуться</button>
+            <section id="respond-block" class="<?= $is_authenticated ? 'authenticated' : '' ?>">
+                <div class="respond-content">
+                    <?php
+                    if ($is_authenticated) {
+                        $stmt = $db->prepare("SELECT * FROM `orders` WHERE u_id = ? AND vacancy_id = ? AND status != 2");
+                        $stmt->bind_param("ii", $user_id, $v_id);
+                        $stmt->execute();
+                        $result = $stmt->get_result();
+
+                        if ($result->num_rows > 0) { ?> 
+                            <p class="respond-text">
+                                Ваш отклик находится на рассмотрении
+                            </p>
+                        <?php
+                        } else { ?>
+
+                            <div class="respond-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M22 16V19C22 20.6569 20.6569 22 19 22H5C3.34315 22 2 20.6569 2 19V16M22 16L12 9L2 16M22 16V5C22 3.34315 20.6569 2 19 2H5C3.34315 2 2 3.34315 2 5V16" stroke="#4A83FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <h3 class="respond-title">Откликнуться на вакансию</h3>
+                            <p class="respond-text">
+                                Заинтересовала вакансия? Оставьте отклик и работодатель свяжется с вами!
+                            </p>
+                            <button id="<?= $is_authenticated ? 'respond-btn' : 'login-btn' ?>" class="respond-btn" <?= !$is_authenticated ? 'data-modal="auth"' : '' ?>>
+                                <?= $is_authenticated ? 'Откликнуться' : 'Войти и откликнуться' ?>
+                            </button>
+                            <?php if ($is_authenticated): ?>
+                                <p class="respond-note">Работодатель увидит отклик и свяжется с вами</p>
+                            <?php endif; ?>
+                        <?php
+                        }
+                    }
+                    ?>
+                    
+                </div>
             </section>
         </div>
     </main>

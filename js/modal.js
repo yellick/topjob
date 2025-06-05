@@ -5,6 +5,7 @@ function main() {
         $('header .profile').remove();
     } else {
         let signInBtn = $("#signin-btn"),
+            loginBtn = $("[data-modal='auth']"),
             modal = $("#modal-login"),
 
             showAuthBtn = $("#show-auth"),
@@ -14,8 +15,16 @@ function main() {
 
             body = $("body");
 
-
         signInBtn.on('click', () => {
+            modal.css({ 
+                'display': 'flex',
+            })
+            body.css({ 
+                'overflow-y': 'hidden',
+            })
+        })
+
+        loginBtn.on('click', () => {
             modal.css({ 
                 'display': 'flex',
             })

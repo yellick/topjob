@@ -33,6 +33,42 @@ header {
         color: #fff;
     }
 
+    a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        width: 200px;
+        height: 30px;
+
+        position: relative;
+
+        background: #fff;
+        color: #1d8bf9;
+        text-decoration: none;
+        font-weight: 700;
+        border-radius: 5px;
+
+        .count {
+            width: 20px;
+            height: 20px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-size: 14px;
+            color: #fff;
+            background: #ff2020;
+
+            position: absolute;
+            top: -5px;
+            right: -5px;
+
+            border-radius: 50%;
+        }
+    }
+
     #logout-btn {
         width: 100px;
         height: 30px;

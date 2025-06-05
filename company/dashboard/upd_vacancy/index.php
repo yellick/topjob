@@ -26,6 +26,7 @@
             try {
                 $stmt = $db->prepare("SELECT vacancies.id as id, 
                                              vacancies.vacancy_name as name, 
+                                             vacancies.status as status, 
                                              vacancies.salary as salary, 
                                              vacancies.description as description, 
                                              vacancies.responsibilities as responsibilities, 
@@ -43,6 +44,7 @@
 
                     $v_id = $vacancy['id'];
                     $v_name = $vacancy['name'];
+                    $v_status = $vacancy['status'];
                     $v_description = $vacancy['description'];
                     $v_salary = $vacancy['salary'];
                     $v_responsibilities = json_decode($vacancy['responsibilities'] ?? '[]', true) ?: [];
@@ -97,6 +99,28 @@
                         <div class="form-group">
                             <label for="vacancy-title">Название вакансии*</label>
                             <input type="text" id="vacancy-title" name="title" required value="<?= htmlspecialchars($v_name ?? '') ?>">
+                            <br>
+                            <br>
+                            <br>
+                            <select name="vacancy_status" id="vacancy-status">
+                                <?php
+                                    $statuses = [
+                                        "Закрыта (не отображается в поиске, кандидат уже найден)",
+                                        "Активна (отображается в поиске)",
+                                        "Заморожена (не отображается в поиске, кандидат не найден)"
+                                    ];
+                                    $code = 0;
+
+                                    foreach ($statuses as $el) {
+                                        if ($code == $v_status) {
+                                            echo " <option value=" . $code . " selected>" . $el ."</option>";
+                                        } else {
+                                            echo " <option value=" . $code . ">" . $el ."</option>";
+                                        }
+                                        $code = $code + 1;
+                                    }
+                                ?>
+                            </select>
                         </div>
                         
                         <div class="form-group">
@@ -157,7 +181,7 @@
                     
                     <div class="form-actions">
                         <a href="../" class="cancel-btn">Отмена</a>
-                        <button type="submit" id="save-btn">Опубликовать вакансию</button>
+                        <button type="submit" id="save-btn">Сохранить изменения вакансию</button>
                     </div>
                 </form>
             </section>

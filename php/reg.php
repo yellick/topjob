@@ -48,8 +48,6 @@
                 'httponly' => true,
                 'samesite' => 'Strict'
             ]);
-            
-            //$db->query("TRUNCATE TABLE `applicants`");
         } else {
             $response = [
                 'status' => false,

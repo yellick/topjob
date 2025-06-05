@@ -102,6 +102,7 @@ function submit_form() {
     // Подготовка данных для отправки
     const formData = {
         id: $('#vacancy-id').val(),
+        status: $('#vacancy-status').val(),
         title: $('#vacancy-title').val().trim(),
         salary: $('#salary').val().trim(),
         description: $('#description').val().trim(),
