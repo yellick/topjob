@@ -60,98 +60,109 @@
     <main>
         <section id="search">
             <input type="text" id="job-search" placeholder="Начните писать" value="<?=$search ?>">
-            <button id="search-btn" >Найти</button>
+            <button id="search-btn" >
+                <span class="btn-text">Найти</span>
+                <i class="btn-image fa fa-search" aria-hidden="true"></i>
+            </button>
         </section>
 
         <div class="vacancies-wrap">
             <section id="filters">
-                <div class="filter">
-                    <div class="filter-title">
-                        <p>Уровень дохода</p> 
-                    </div>
-            
-                    <div class="filters-list">
-                        <ul>
-                            <li>
-                                <label>
-                                    <input type="radio" name="amount" value="0" checked>
-                                    <span>не имеет значения</span>
-                                </label>
-                            </li>
-                            
-                            <?php
-                                $stmt = $db->prepare("SELECT * FROM `salaries`");
-                                $stmt->execute();
-                                $result = $stmt->get_result();
-
-                                if ($result->num_rows > 0):
-                                    while ($row =$result->fetch_assoc()) {
-                            ?>
-                                        <li>
-                                            <label>
-                                                <input type="radio" name="amount" value="<?= $row['salary'] ?>">
-                                                <span>от <?= $row['salary'] ?> ₽</span>
-                                            </label>
-                                        </li>
-                            <?php
-                                    }
-                            ?>
-
-                            <?php else: ?>
-                                <li>
-                                    <label>
-                                        <input type="radio" name="amount" value="25000">
-                                        <span>от 25 000 ₽</span>
-                                    </label>
-                                </li>
-                                <li>
-                                    <label>
-                                        <input type="radio" name="amount" value="75000">
-                                        <span>от 75 000 ₽</span>
-                                    </label>
-                                </li>
-                                <li>
-                                    <label>
-                                        <input type="radio" name="amount" value="125000">
-                                        <span>от 125 000 ₽</span>
-                                    </label>
-                                </li>
-                                <li>
-                                    <label>
-                                        <input type="radio" name="amount" value="175000">
-                                        <span>от 175 000 ₽</span>
-                                    </label>
-                                </li>
-                                <li>
-                                    <label>
-                                        <input type="radio" name="amount" value="225000">
-                                        <span>от 225 000 ₽</span>
-                                    </label>
-                                </li>
-                                <li>
-                                    <label>
-                                        <input type="radio" name="amount" value="275000">
-                                        <span>от 275 000 ₽</span>
-                                    </label>
-                                </li>
-                            <?php endif; ?>
-                        </ul>
-                        
-                    </div>
+                <div id="filter-header" class="filter-header">
+                    <p>Фильтры</p>
+                    <button id="toggle-filters" class="toggle-btn">
+                        <i class="fa fa-chevron-up" aria-hidden="true"></i>
+                    </button>
                 </div>
-                <div class="filter">
-                    <div class="filter-title">
-                        <p>Город</p> 
+                <div class="filter-content">
+                    <div class="filter">    
+                        <div class="filter-title">
+                            <p>Уровень дохода</p> 
+                        </div>
+                
+                        <div class="filters-list">
+                            <ul>
+                                <li>
+                                    <label>
+                                        <input type="radio" name="amount" value="0" checked>
+                                        <span>не имеет значения</span>
+                                    </label>
+                                </li>
+                                
+                                <?php
+                                    $stmt = $db->prepare("SELECT * FROM `salaries`");
+                                    $stmt->execute();
+                                    $result = $stmt->get_result();
+
+                                    if ($result->num_rows > 0):
+                                        while ($row =$result->fetch_assoc()) {
+                                ?>
+                                            <li>
+                                                <label>
+                                                    <input type="radio" name="amount" value="<?= $row['salary'] ?>">
+                                                    <span>от <?= $row['salary'] ?> ₽</span>
+                                                </label>
+                                            </li>
+                                <?php
+                                        }
+                                ?>
+
+                                <?php else: ?>
+                                    <li>
+                                        <label>
+                                            <input type="radio" name="amount" value="25000">
+                                            <span>от 25 000 ₽</span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label>
+                                            <input type="radio" name="amount" value="75000">
+                                            <span>от 75 000 ₽</span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label>
+                                            <input type="radio" name="amount" value="125000">
+                                            <span>от 125 000 ₽</span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label>
+                                            <input type="radio" name="amount" value="175000">
+                                            <span>от 175 000 ₽</span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label>
+                                            <input type="radio" name="amount" value="225000">
+                                            <span>от 225 000 ₽</span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label>
+                                            <input type="radio" name="amount" value="275000">
+                                            <span>от 275 000 ₽</span>
+                                        </label>
+                                    </li>
+                                <?php endif; ?>
+                            </ul>
+                            
+                        </div>
                     </div>
-                    <select id="city-select" class="city-select">
-                        <option value=""></option>
-                        <?php foreach ($cities as $city): ?>
-                            <option value="<?= htmlspecialchars($city['id']) ?>" 
-                                <?= ($user['city'] ?? '') == $city['id'] ? 'selected' : '' ?>>
-                                <?= htmlspecialchars($city['city_name']) ?>
-                            </option>
-                        <?php endforeach; ?>
-                    </select>
+                    <div class="filter">
+                        <div class="filter-title">
+                            <p>Город</p> 
+                        </div>
+                        <select id="city-select" class="city-select">
+                            <option value=""></option>
+                            <?php foreach ($cities as $city): ?>
+                                <option value="<?= htmlspecialchars($city['id']) ?>" 
+                                    <?= ($user['city'] ?? '') == $city['id'] ? 'selected' : '' ?>>
+                                    <?= htmlspecialchars($city['city_name']) ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
                 </div>
             </section>
     

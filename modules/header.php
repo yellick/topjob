@@ -20,7 +20,7 @@
 
         <div class="profile">
             <?php if ($is_authenticated):?> 
-                <a href="<?= BASE_URL ?>profile/" class="user" target="_blank">
+                <a href="<?= BASE_URL ?>profile/" class="user">
                     <p><?=$initials?></p>
                 </a>
             <?php else: ?>

@@ -11,7 +11,7 @@ button:hover {
 
 main{
     width: 100%;
-    min-height: calc(100% - 50px);
+    min-height: calc(100% - 150px);
 
     padding: 30px 0 0 0;
     box-sizing: border-box;
@@ -20,9 +20,7 @@ main{
     flex-direction: column;
     align-items: center;
 
-    > * {
-        width: 80%;
-    }
+    > * { width: 80%; }
 
     section {
         background: #fff;
@@ -66,6 +64,9 @@ main{
             border: none;
             outline: none;
             border-radius: 10px;
+
+            span { margin-right: 10px; }
+            i { font-size: 18px }
         }
     }
 
@@ -78,6 +79,64 @@ main{
             width: 29%;
             height: 100%;
             margin-bottom: 20px;
+            position: relative;
+            transition: height 0.3s ease;
+            overflow: hidden;
+
+            .filter-header {
+                cursor: pointer;
+                width: 100%;
+                height: 50px;
+                padding: 0 20px;
+                box-sizing: border-box;
+
+                justify-content: space-between;
+                align-items: center;
+
+                background: #fff;
+                border-radius: 10px 10px 0 0;
+                user-select: none;
+
+                p {
+                    font-weight: 800;
+                    margin: 0;
+                }
+
+                .toggle-btn {
+                    background: none;
+                    border: none;
+                    outline: none;
+                    cursor: pointer;
+
+                    i {
+                        font-size: 16px;
+                        color: #666;
+                        transition: transform 0.3s ease;
+                    }
+                }
+            }
+
+            .filter-content {
+                width: 100%;
+                background: #fff;
+                border-radius: 0 0 10px 10px;
+            }
+
+            &.collapsed {
+                height: 50px;
+
+                .filter-header {
+                    border-radius: 10px;
+                }
+
+                .toggle-btn i {
+                    transform: rotate(180deg);
+                }
+
+                .filter-content {
+                    display: none;
+                }
+            }
         
             .filter {
                 width: 100%;
@@ -140,6 +199,66 @@ main{
                         }
                     }
                 }
+
+                .select2-container {
+                    width: 100% !important;
+                    margin-bottom: 20px;
+                }
+
+                .select2-selection {
+                    height: 42px !important;
+                    border: 1px solid #b3b3b3 !important;
+                    border-radius: 10px !important;
+                    padding: 5px 10px !important;
+                    font-size: 16px !important;
+                }
+
+                .select2-selection__arrow {
+                    height: 40px !important;
+                }
+
+                .select2-dropdown {
+                    border: 1px solid #b3b3b3 !important;
+                    border-radius: 10px !important;
+                    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+                    width: 29% !important;
+                    max-width: 100% !important;
+                    left: auto !important;
+                    right: auto !important;
+                }
+
+                .select2-container--open .select2-dropdown {
+                    position: absolute !important;
+                    top: 100% !important;
+                    left: 0 !important;
+                }
+
+                .select2-results {
+                    padding: 0 !important;
+                }
+
+                .select2-results__option {
+                    padding: 8px 12px !important;
+                    white-space: normal !important;
+                }
+
+                .select2-results__option--highlighted {
+                    background-color: #f5f5f5 !important;
+                    color: #333 !important;
+                }
+
+                .select2-search--dropdown {
+                    padding: 10px !important;
+                }
+
+                .select2-search__field {
+                    border: 1px solid #ddd !important;
+                    border-radius: 6px !important;
+                    padding: 6px 10px !important;
+                    outline: none !important;
+                    width: 100% !important;
+                    box-sizing: border-box !important;
+                }
             }
         }
 
@@ -188,10 +307,16 @@ main{
                 transition: 0.2s;
 
                 .vacancy-title {
-                    font-size: 24px;
+                    font-size: 22px;
                     font-weight: 700;
                     letter-spacing: 1px;
                     margin-bottom: 10px;
+
+                    h1 {  
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
                 }
 
                 .vacancy-salary {
@@ -223,65 +348,113 @@ main{
     }
 }
 
-/* Select2 стили (исправленные) */
-.select2-container {
-    width: 100% !important;
-    margin-bottom: 20px;
+
+@media (min-width: 769px) {
+    #filters {
+        .filter-header {
+            display: none !important;
+        }
+        
+        &.collapsed {
+            height: auto !important;
+            
+            .filter-content {
+                display: block !important;
+            }
+        }
+    }
 }
 
-.select2-selection {
-    height: 42px !important;
-    border: 1px solid #b3b3b3 !important;
-    border-radius: 10px !important;
-    padding: 5px 10px !important;
-    font-size: 16px !important;
+@media (max-width: 768px) {
+    main{
+        #search {
+            #job-search {
+                width: 75%;
+                margin-right: 5%;
+            }
+
+            #search-btn {
+                width: 20%;
+            }
+        }
+
+        .vacancies-wrap {
+            flex-direction: column;
+
+            #filters {
+                width: 100%;
+
+                .filter-header {
+                    display: flex;
+                }
+                
+                &.collapsed {
+                    .filter-content {
+                        display: none !important;
+                    }
+                }
+                
+                &:not(.collapsed) {
+                    .filter-content {
+                        display: block !important;
+                    }
+                }
+            }
+
+            #vacancies {
+                width: 100%;
+            }
+        }
+    }
 }
 
-.select2-selection__arrow {
-    height: 40px !important;
+@media (max-width: 630px) {
+    main{
+        #search {
+            #job-search {
+                width: calc(95% - 40px);
+                margin-right: 5%;
+            }
+
+            #search-btn {
+                width: 40px;
+
+                span {display: none;}
+            }
+        }
+    }
 }
 
-/* Главный фикс - ограничиваем ширину выпадающего списка */
-.select2-dropdown {
-    border: 1px solid #b3b3b3 !important;
-    border-radius: 10px !important;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    width: 29% !important; /* Ширина как у #filters */
-    max-width: 100% !important;
-    left: auto !important;
-    right: auto !important;
-}
+@media (max-width: 420px) {
+    main {
+        #search {
+            #job-search {
+                font-size: 16px;
+            }
+        }
+        .vacancies-wrap {
+            #vacancies {
+                .vacancy {
+                    .vacancy-title {
+                        font-size: 18px;
+                        font-weight: 700;
+                        letter-spacing: 1px;
+                        margin-bottom: 10px;
+                    }
 
-/* Позиционируем относительно родителя */
-.select2-container--open .select2-dropdown {
-    position: absolute !important;
-    top: 100% !important;
-    left: 0 !important;
-}
-
-.select2-results {
-    padding: 0 !important;
-}
-
-.select2-results__option {
-    padding: 8px 12px !important;
-    white-space: normal !important;
-}
-
-.select2-results__option--highlighted {
-    background-color: #f5f5f5 !important;
-    color: #333 !important;
-}
-
-.select2-search--dropdown {
-    padding: 10px !important;
-}
-
-.select2-search__field {
-    border: 1px solid #ddd !important;
-    border-radius: 6px !important;
-    padding: 6px 10px !important;
-    outline: none !important;
-    width: 100% !important;
-    box-sizing: border-box !important;
+                    .vacancy-salary {
+                        font-size: 16px;
+                    }
+                    
+                    .vacancy-company {
+                        font-size: 12px;
+                    }
+                    
+                    .vacancy-location {
+                        font-size: 12px;
+                    }
+                }
+            }
+        }
+    }
 }

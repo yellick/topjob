@@ -186,7 +186,7 @@
                         $result = $stmt->get_result();
 
                         if ($result->num_rows > 0) { ?> 
-                            <p class="respond-text">
+                            <p class="respond-text" style="margin: 0;">
                                 Ваш отклик находится на рассмотрении
                             </p>
                         <?php
@@ -209,6 +209,21 @@
                             <?php endif; ?>
                         <?php
                         }
+                    } else {
+                        ?>
+                            <div class="respond-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M22 16V19C22 20.6569 20.6569 22 19 22H5C3.34315 22 2 20.6569 2 19V16M22 16L12 9L2 16M22 16V5C22 3.34315 20.6569 2 19 2H5C3.34315 2 2 3.34315 2 5V16" stroke="#4A83FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <h3 class="respond-title">Откликнуться на вакансию</h3>
+                            <p class="respond-text">
+                                Заинтересовала вакансия? Оставьте отклик и работодатель свяжется с вами!
+                            </p>
+                            <button id="login-btn" class="respond-btn" data-modal="auth">
+                                Войти и откликнуться
+                            </button>
+                        <?php
                     }
                     ?>
                     

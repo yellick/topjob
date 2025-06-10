@@ -437,7 +437,6 @@ main {
     transform: scale(0.96);
 }
 
-/* Сообщения о пустом состоянии и ошибках */
 .empty-applications {
     grid-column: 1 / -1;
     text-align: center;
@@ -464,7 +463,6 @@ main {
     font-weight: 600;
 }
 
-/* Адаптивность */
 @media (max-width: 768px) {
     .filters {
         flex-direction: column;

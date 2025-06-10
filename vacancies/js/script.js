@@ -76,7 +76,7 @@ $(document).ready(function() {
             const vacancyElement = $(`
                 <a href="../vacancy/?vacancy=${vacancy.id}" class="vacancy">
                     <div class="vacancy-title">
-                        <h1>${vacancy.title}</h1>
+                        <h1 title="${vacancy.title}">${vacancy.title}</h1>
                     </div>
                     <div class="vacancy-salary">
                         <p>${salaryText}</p>
@@ -93,4 +93,51 @@ $(document).ready(function() {
             $vacanciesContainer.append(vacancyElement);
         });
     }
+
+
+    $('#filter-header').on('click', function() {
+        // Проверяем, что мы на мобильном устройстве
+        if ($(window).width() <= 768) {
+            const $filters = $('#filters');
+            const $content = $('.filter-content');
+            const $icon = $(this).find('i');
+            
+            if ($filters.hasClass('collapsed')) {
+                // Разворачиваем
+                $filters.removeClass('collapsed');
+                $content.slideDown(300, function() {
+                    $(this).css('display', ''); // Убираем inline-стиль после анимации
+                });
+                $icon.removeClass('fa-chevron-down').addClass('fa-chevron-up');
+            } else {
+                // Сворачиваем
+                $filters.addClass('collapsed');
+                $content.slideUp(300);
+                $icon.removeClass('fa-chevron-up').addClass('fa-chevron-down');
+            }
+        }
+    });
+
+    // Инициализация состояния
+    if ($(window).width() <= 768) {
+        $('#filters').addClass('collapsed');
+        $('#toggle-filters i').removeClass('fa-chevron-up').addClass('fa-chevron-down');
+        $('.filter-content').hide();
+    }
+
+    $(window).on('resize', function() {
+        if ($(window).width() > 768) {
+            // На десктопе всегда показываем контент и убираем свернутое состояние
+            $('#filters').removeClass('collapsed');
+            $('.filter-content').show();
+            $('#toggle-filters i').removeClass('fa-chevron-down').addClass('fa-chevron-up');
+        } else {
+            // На мобильных проверяем состояние
+            if ($('#filters').hasClass('collapsed')) {
+                $('.filter-content').hide();
+            } else {
+                $('.filter-content').show();
+            }
+        }
+    });
 });

@@ -25,7 +25,7 @@ class Notification {
                 ['padding', '0 20px'],
                 ['transition', '0.5s'],
                 ['cursor', 'pointer'],
-                ['z-index', '15'],
+                ['z-index', '150'],
             ],
             
             'notification_icon': [

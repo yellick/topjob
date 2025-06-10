@@ -37,7 +37,7 @@
                 `vacancy_id`,
                 `create_date`,
                 `status`
-            ) VALUES (?, ?, NOW(), 1)
+            ) VALUES (?, ?, NOW(), 0)
         ");
         
         $stmt->bind_param("ii", $user_id, $vacancy_id);
