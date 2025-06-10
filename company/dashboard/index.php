@@ -53,6 +53,7 @@
     <title>Top Job - Управление компанией</title>
     <?php require '../../modules/def_links.php'; ?>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/styles1.css">
 </head>
 <body>
     <header>
@@ -102,7 +103,7 @@
             <div class="content-sect">
                 <a href="edit/" class="link-btn">Редактировать данные</a>
             </div>
-            
+
             <div class="content-sect">
                 <div class="title">
                     <h1>Вакансии</h1>
