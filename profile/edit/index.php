@@ -135,7 +135,7 @@
                     <button type="button" id="add-skill" class="add-btn">+ Добавить навык</button>
                 </div>
                 <div class="form-actions">
-                    <a href="../" class="cancel-btn">Отмена</a>
+                    <a href="../" class="cancel-btn">Назад</a>
                     <button type="submit" id="save-btn">Сохранить изменения</button>
                 </div>
             </form>

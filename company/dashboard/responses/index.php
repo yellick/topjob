@@ -65,8 +65,8 @@
                     </select>
                     <select name="order-status" id="order-status">
                         <option value="-1" selected>Все статусы</option>
-                        <option value="0">Собеседование</option>
-                        <option value="1">На рассмотрении</option>
+                        <option value="1">Собеседование</option>
+                        <option value="0">На рассмотрении</option>
                         <!-- <option value="2">Отклоненные</option> -->
                     </select>
                 </div>
