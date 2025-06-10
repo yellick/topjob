@@ -102,8 +102,7 @@
             <div class="content-sect">
                 <a href="edit/" class="link-btn">Редактировать данные</a>
             </div>
-
-
+            
             <div class="content-sect">
                 <div class="title">
                     <h1>Вакансии</h1>
@@ -111,42 +110,31 @@
 
                 <div class="vacancies">
                     <a href="new_vacancy/" class="link-btn">Создать вакансию</a>
-                    <div class="table-wrap">
-                        <table>
-                            <caption>Список вакансий</caption>
-                            <thead>
-                                <tr>
-                                    <th>Вакансия</th>
-                                    <th>Статус</th>
-                                    <th>Действия</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                    $stmt = $db->prepare("SELECT `id`, `vacancy_name`, `status` FROM `vacancies` WHERE company_id = ? ORDER BY status ASC");
-                                    $stmt->bind_param("i", $company_id);
-                                    $stmt->execute();
-                                    $result = $stmt->get_result();
+                    <div class="vacancies-cards">
+                        <?php
+                            $stmt = $db->prepare("SELECT `id`, `vacancy_name`, `status` FROM `vacancies` WHERE company_id = ? ORDER BY status ASC");
+                            $stmt->bind_param("i", $company_id);
+                            $stmt->execute();
+                            $result = $stmt->get_result();
 
-                                    $statuses = [
-                                        '<td style="color: #ff8316;">Активная</td>',
-                                        '<td style="color: #00ff1a;">Закрыта</td>',
-                                        '<td style="color:rgb(5, 19, 124);">Заморожена</td>'
-                                    ];
+                            $statuses = [
+                                '<span class="status-badge active">Активная</span>',
+                                '<span class="status-badge closed">Закрыта</span>',
+                                '<span class="status-badge frozen">Заморожена</span>'
+                            ];
 
-                                    while ($row = $result->fetch_assoc()):
-                                ?>
-                                    <tr>
-                                        <td><?=$row['vacancy_name']?></td>
-
-                                        <?=$statuses[$row['status']]?>
-                                        <td>
-                                            <a href="upd_vacancy/?vacancy=<?=$row['id']?>">Изменить</a>
-                                        </td>
-                                    </tr>
-                                <?php endwhile; ?>
-                            </tbody>
-                        </table>
+                            while ($row = $result->fetch_assoc()):
+                        ?>
+                            <div class="vacancy-card">
+                                <div class="vacancy-info">
+                                    <h3><?=$row['vacancy_name']?></h3>
+                                    <?=$statuses[$row['status']]?>
+                                </div>
+                                <div class="vacancy-actions">
+                                    <a href="upd_vacancy/?vacancy=<?=$row['id']?>" class="action-btn">Изменить</a>
+                                </div>
+                            </div>
+                        <?php endwhile; ?>
                     </div>
                 </div>
             </div>
