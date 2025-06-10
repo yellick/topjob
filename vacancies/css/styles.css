@@ -221,7 +221,7 @@ main{
                     border: 1px solid #b3b3b3 !important;
                     border-radius: 10px !important;
                     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-                    width: 29% !important;
+                    width: calc(100% - 30px) !important;
                     max-width: 100% !important;
                     left: auto !important;
                     right: auto !important;
@@ -240,6 +240,7 @@ main{
                 .select2-results__option {
                     padding: 8px 12px !important;
                     white-space: normal !important;
+                    font-size: 12px;
                 }
 
                 .select2-results__option--highlighted {
