@@ -81,7 +81,6 @@ main{
             margin-bottom: 20px;
             position: relative;
             transition: height 0.3s ease;
-            overflow: hidden;
 
             .filter-header {
                 cursor: pointer;
@@ -352,6 +351,8 @@ main{
 
 @media (min-width: 769px) {
     #filters {
+        overflow: hidden;
+
         .filter-header {
             display: none !important;
         }

@@ -9,7 +9,7 @@ $(document).ready(function() {
         language: "ru",
         width: '100%',
         dropdownAutoWidth: false,
-        dropdownParent: $('#filters .filter:last')
+        dropdownParent: $(document.body)
     });
 
     // Обработчик изменения города

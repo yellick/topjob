@@ -351,3 +351,49 @@ main {
         }
     }
 }
+
+@media (max-width: 768px) {
+    header {
+        height: auto;
+        padding: 10px 20px;
+        flex-direction: column;
+        gap: 10px;
+        
+        .logo {
+            font-size: 22px;
+            width: 100%;
+            text-align: center;
+        }
+        
+        a {
+            width: 100%;
+            order: 3;
+            margin-top: 10px;
+        }
+        
+        #logout-btn {
+            width: 100%;
+            order: 2;
+            margin: 5px 0;
+        }
+        
+        > div {
+            display: none;
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        padding: 8px 15px;
+        
+        .logo {
+            font-size: 20px;
+        }
+        
+        a, #logout-btn {
+            height: 35px;
+            font-size: 14px;
+        }
+    }
+}
